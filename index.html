@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Pascal Hertleif">
+  <meta name="dcterms.date" content="2018-12-15">
+  <title>Rust’s approach of getting things right</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="template/css/reveal.css">
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="template/css/theme/pascal-light.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'template/css/print/pdf.css' : 'template/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="template/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Rust’s approach of getting things right</h1>
+  <p class="author">Pascal Hertleif</p>
+  <p class="date">2018-12-15</p>
+</section>
+
+<section id="hi-im-pascal-hertleif" class="slide level1">
+<h1>Hi, I’m Pascal Hertleif</h1>
+<ul>
+<li>Dev tools team</li>
+<li><a href="https://rust-lang-nursery.github.io/cli-wg/">CLI WG</a></li>
+<li>{<a href="https://twitter.com/killercup">twitter</a>,<a href="https://github.com/killercup">github</a>}.com/killercup</li>
+<li>Rust-centric blog: <a href="https://deterministic.space/">deterministic.space</a></li>
+</ul>
+<aside class="notes">
+<p>I’ve been working with Rust since early 2014, and I’ve been loving every minute of it.</p>
+<p>Right now, I’m leading the CLI working group. Our goal is to make writing command line applications in Rust <em>amazing</em>!</p>
+</aside>
+</section>
+<section id="thank-you" class="slide level1">
+<h1>Thank you!</h1>
+<p>I’m Pascal and I want you to talk to me!</p>
+<p>{<a href="https://twitter.com/killercup">twitter</a>,<a href="https://github.com/killercup">github</a>}.com/killercup</p>
+<p>Slides: <a href="https://git.io/rust-approach">git.io/rust-approach</a></p>
+</section>
+    </div>
+  </div>
+
+  <script src="template/lib/js/head.min.js"></script>
+  <script src="template/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: 0,
+        // Display a presentation progress bar
+        progress: true,
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'template/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'template/plugin/zoom-js/zoom.js', async: true },
+          { src: 'template/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
