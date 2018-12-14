@@ -216,7 +216,7 @@ and its main feature is the built-in theorem prover.
 Using this, it can,
 at compile-time,
 prove the absence of buffer overflows and memory corruptions,
-but also other properties like division by zero.
+but also other properties like division by zero. 
 
 :::
 
@@ -226,6 +226,26 @@ but also other properties like division by zero.
 
 [Affine logic](https://en.wikipedia.org/wiki/Affine_logic)
 
+::: notes
+
+Those languages seem interesting
+but let's have a little wider of a look.
+
+> The logicians usually get there before the computer scientists.
+>
+> – Philip Wadler on [Corecursive #21](https://corecursive.com/021-gods-programming-language-with-philip-wadler/)
+
+(Philip Wadler is Professor of Theoretical Computer Science at University of Edinburgh)
+
+> 1. can be used any number of times (default)
+> 2. can't be used more than once (affine)
+> 3. must be used at least once (relevant)
+> 4. must be used exactly once (linear)
+>
+> – Gankro in [The Pain Of Real Linear Types in Rust](https://gankro.github.io/blah/linear-rust/)
+
+:::
+
 - - -
 
 ## Prior art
@@ -234,11 +254,31 @@ but also other properties like division by zero.
 >
 > – Roversi, Luca. "Light affine logic as a programming language: a first contribution." _International Journal of Foundations of Computer Science_ 11.01 (2000): 113-152.
 
+::: notes
+
+People tried to define programming languages based on affine logic before.
+Roversi describes \(Λ^{T}_{LA}\) ("Lambda L.A. T.") in 2000.
+
+Similar to ATS and Cyclone this doesn't become recognized by mainstream programmers.
+
+:::
+
 - - -
 
 > […] Rust finally nailed it down in a way that is accessible to everyone.
 >
 > – Stjepan Glavina
+
+::: notes
+
+And this is where Rust made the break-through:
+It is based on the same, old concept of affine logic,
+but packages it up in a practical and attractive way.
+
+That Rust makes this (somewhat) approachable
+is probably why we are here, at a Rust conference.
+
+:::
 
 - - -
 

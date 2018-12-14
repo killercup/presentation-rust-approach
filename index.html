@@ -161,6 +161,23 @@
 
 <h2 id="prior-art-2">Prior art</h2>
 <p><a href="https://en.wikipedia.org/wiki/Affine_logic">Affine logic</a></p>
+<aside class="notes">
+<p>Those languages seem interesting but let’s have a little wider of a look.</p>
+<blockquote>
+<p>The logicians usually get there before the computer scientists.</p>
+<p>– Philip Wadler on <a href="https://corecursive.com/021-gods-programming-language-with-philip-wadler/">Corecursive #21</a></p>
+</blockquote>
+<p>(Philip Wadler is Professor of Theoretical Computer Science at University of Edinburgh)</p>
+<blockquote>
+<ol type="1">
+<li>can be used any number of times (default)</li>
+<li>can’t be used more than once (affine)</li>
+<li>must be used at least once (relevant)</li>
+<li>must be used exactly once (linear)</li>
+</ol>
+<p>– Gankro in <a href="https://gankro.github.io/blah/linear-rust/">The Pain Of Real Linear Types in Rust</a></p>
+</blockquote>
+</aside>
 </section>
 <section class="slide level1">
 
@@ -169,6 +186,10 @@
 <p>This work is about a functional language <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Λ</mi><mi>L</mi></msub><mi>A</mi></mrow><annotation encoding="application/x-tex">Λ_LA</annotation></semantics></math>, with a typable sub-set <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>Λ</mi><mrow><mi>L</mi><mi>A</mi></mrow><mi>T</mi></msubsup><annotation encoding="application/x-tex">Λ^{T}_{LA}</annotation></semantics></math>. The types for <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>Λ</mi><mrow><mi>L</mi><mi>A</mi></mrow><mi>T</mi></msubsup><annotation encoding="application/x-tex">Λ^{T}_{LA}</annotation></semantics></math> are polymorphic formulas of Intuitionistic Light Affine Logic (ILAL in the following.) Polymorphism is a la ML: all the universal quantifications in any formula must occur as top-most operators.</p>
 <p>– Roversi, Luca. “Light affine logic as a programming language: a first contribution.” <em>International Journal of Foundations of Computer Science</em> 11.01 (2000): 113-152.</p>
 </blockquote>
+<aside class="notes">
+<p>People tried to define programming languages based on affine logic before. Roversi describes <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>Λ</mi><mrow><mi>L</mi><mi>A</mi></mrow><mi>T</mi></msubsup><annotation encoding="application/x-tex">Λ^{T}_{LA}</annotation></semantics></math> (“Lambda L.A. T.”) in 2000.</p>
+<p>Similar to ATS and Cyclone this doesn’t become recognized by mainstream programmers.</p>
+</aside>
 </section>
 <section class="slide level1">
 
@@ -176,6 +197,10 @@
 <p>[…] Rust finally nailed it down in a way that is accessible to everyone.</p>
 <p>– Stjepan Glavina</p>
 </blockquote>
+<aside class="notes">
+<p>And this is where Rust made the break-through: It is based on the same, old concept of affine logic, but packages it up in a practical and attractive way.</p>
+<p>That Rust makes this (somewhat) approachable is probably why we are here, at a Rust conference.</p>
+</aside>
 </section>
 <section class="slide level1">
 
