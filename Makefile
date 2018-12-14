@@ -5,7 +5,9 @@ OUTPUT_FOLDER ?= $(shell pwd)/dist
 
 slides:
 	@pandoc $(INPUT).md \
+	--from markdown+tex_math_single_backslash \
 	--to revealjs \
+	--mathml \
 	--output index.html \
 	--template template/index.html \
 	-V theme=pascal-light \

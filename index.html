@@ -15,6 +15,7 @@
       span.smallcaps{font-variant: small-caps;}
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
+      .reveal .slide blockquote {font-style: normal; }
   </style>
   <link rel="stylesheet" href="template/css/theme/pascal-light.css" id="theme">
   <!-- Printing and PDF exports -->
@@ -50,7 +51,173 @@
 <aside class="notes">
 <p>I’ve been working with Rust since early 2014, and I’ve been loving every minute of it.</p>
 <p>Right now, I’m leading the CLI working group. Our goal is to make writing command line applications in Rust <em>amazing</em>!</p>
+<p>Okay.</p>
+<p>First things first.</p>
 </aside>
+</section>
+<section class="slide level1">
+
+<p><em>Pascal says:</em></p>
+<blockquote>
+<p>A programming language is only as useful as what people actually use it for.</p>
+</blockquote>
+</section>
+<section id="what-is-rust" class="slide level1">
+<h1>What is Rust?</h1>
+<blockquote>
+<p>A systems programming language that runs blazingly fast, prevents segfaults, and guarantees thread safety.</p>
+</blockquote>
+<aside class="notes">
+<p>That’s cool, but what does that mean <em>for me</em>?</p>
+</aside>
+</section>
+<section id="what-is-rust-1" class="slide level1">
+<h1>What is Rust?</h1>
+<blockquote>
+<p>Empowering everyone to build reliable and efficient software.</p>
+</blockquote>
+<aside class="notes">
+<p>Less of a feature checklist, tells you how it helps <em>you</em>.</p>
+<p>This is the slogan right next to the Rust logo on the current website. I know it took quite a while to settle on this, and I think it’s super good.</p>
+</aside>
+</section>
+<section class="slide level1">
+
+<h2 id="what-is-rust-2">What is Rust?</h2>
+<blockquote>
+<p>Technology from the past come to save the future from itself</p>
+<p>– Graydon Hoare, inventor of Rust</p>
+</blockquote>
+<aside class="notes">
+<p>Woah, that’s a completely different spin on it.</p>
+<p>What did Graydon mean by it?</p>
+<p>By the way, he goes on to say:</p>
+<blockquote>
+<p>Many older languages <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mi>r</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">are</annotation></semantics></math> better than new ones. We keep forgetting already-learned lessons.</p>
+</blockquote>
+</aside>
+</section>
+<section class="slide level1">
+
+<h2 id="prior-art">Prior art</h2>
+<blockquote>
+<p>all information that has been made available to the public in any form before a given date that might be relevant to a patent’s claims of originality.</p>
+<p>– <a href="https://en.wikipedia.org/wiki/Prior_art">Wikipedia</a></p>
+</blockquote>
+<aside class="notes">
+<p>This talk is on how the Rust community embraces the idea of looking at “prior art”.</p>
+<p>If you don’t know this phrase, here is how Wikipedia defines it. As you can see it’s originally from patent laws.</p>
+</aside>
+</section>
+<section class="slide level1">
+
+<h2 id="we-dont-need-to-re-invent-everything">We don’t need to re-invent everything</h2>
+<p>We should embrace the ideas that are already out there, and apply them in the current context.</p>
+<aside class="notes">
+<p>Some people I know have this tendency to try to work through problem all on their own. They sit down, think real hard, and come up with a solution. That is a good idea when it comes to very domain-specific problems but more general concepts it really pays off to look at what is already out there.</p>
+</aside>
+</section>
+<section class="slide level1">
+
+<h2 id="this-is-not-a-rewrite-it-in-rust-talk">This is not a “Rewrite it in Rust” talk</h2>
+<div class="fragment">
+<p>It’s more of a “be curious and try out weird things” kind of talk</p>
+<aside class="notes">
+<p>But I don’t mean this in the sense of: Look at an existing piece of software and rewrite it in Rust, just because you think it being Rust makes it better.</p>
+<p>We should always make sure to adapt to the current context. What have we learned in the meantime? What were the original designers not happy with?</p>
+</aside>
+</div>
+</section>
+<section id="for-example-the-borrow-checker" class="slide level1">
+<h1>For example: The borrow checker</h1>
+<p>Problem: Write memory-safe high-performance code</p>
+<aside class="notes">
+<p>I’ll talk about some projects, as well as some people, and their stories. The first one is about the borrow checker. Or, the Ownership and Borrowing system that is arguably the main features that differentiates Rust from other mainstream languages.</p>
+<p>The problem was writing memory-safe high-performance code. C/C++ allow writing high-performance code but getting it right is very hard.</p>
+<p>Rust is a try at making a language that allowed both: High performance, and memory safety.</p>
+</aside>
+</section>
+<section class="slide level1">
+
+<h2 id="prior-art-1">Prior art</h2>
+<div class="fragment">
+<p><a href="https://en.wikipedia.org/wiki/Cyclone_(programming_language)">Cyclone</a> (2002): “safe C”, never-NULL pointers, region analysis</p>
+</div>
+<div class="fragment">
+<p><a href="https://en.wikipedia.org/wiki/ATS_(programming_language)">ATS</a> (2005): ML-inspired language with a built-in theorem prover</p>
+<aside class="notes">
+<p>I specifically said “mainstream languages”: Because there are other languages that tried that before!</p>
+<p>At AT&amp;T Labs, the Cyclone language was developed as a “safe C” dialect. If you look at its features you’ll see a bunch of similarities with Rust:</p>
+<ul>
+<li>pointer types that are guaranteed to be not-NULL</li>
+<li>pointers must be initialized before they can be used</li>
+<li>only safe casts</li>
+</ul>
+<p>Another language is ATS (Applied Type System). It’s inspired by ML, and its main feature is the built-in theorem prover. Using this, it can, at compile-time, prove the absence of buffer overflows and memory corruptions, but also other properties like division by zero.</p>
+</aside>
+</div>
+</section>
+<section class="slide level1">
+
+<h2 id="prior-art-2">Prior art</h2>
+<p><a href="https://en.wikipedia.org/wiki/Affine_logic">Affine logic</a></p>
+</section>
+<section class="slide level1">
+
+<h2 id="prior-art-3">Prior art</h2>
+<blockquote>
+<p>This work is about a functional language <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Λ</mi><mi>L</mi></msub><mi>A</mi></mrow><annotation encoding="application/x-tex">Λ_LA</annotation></semantics></math>, with a typable sub-set <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>Λ</mi><mrow><mi>L</mi><mi>A</mi></mrow><mi>T</mi></msubsup><annotation encoding="application/x-tex">Λ^{T}_{LA}</annotation></semantics></math>. The types for <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>Λ</mi><mrow><mi>L</mi><mi>A</mi></mrow><mi>T</mi></msubsup><annotation encoding="application/x-tex">Λ^{T}_{LA}</annotation></semantics></math> are polymorphic formulas of Intuitionistic Light Affine Logic (ILAL in the following.) Polymorphism is a la ML: all the universal quantifications in any formula must occur as top-most operators.</p>
+<p>– Roversi, Luca. “Light affine logic as a programming language: a first contribution.” <em>International Journal of Foundations of Computer Science</em> 11.01 (2000): 113-152.</p>
+</blockquote>
+</section>
+<section class="slide level1">
+
+<blockquote>
+<p>[…] Rust finally nailed it down in a way that is accessible to everyone.</p>
+<p>– Stjepan Glavina</p>
+</blockquote>
+</section>
+<section class="slide level1">
+
+<blockquote>
+<p>I think of Rust as fertile ground for growing cool stuff.</p>
+<p>– Stjepan Glavina</p>
+</blockquote>
+</section>
+<section class="slide level1">
+
+<blockquote>
+<p>Whenever something interesting comes out of academia, I try to think: How do we make this more practical? Can we reach a little bit farther? Can we bend the curve somewhere?</p>
+<p>– Stjepan Glavina</p>
+</blockquote>
+</section>
+<section class="slide level1">
+
+<h2 id="can-we-bend-the-curve-somewhere">“Can we bend the curve somewhere?”</h2>
+<p>The community is trying to find a way to overcome traditional trade-offs</p>
+</section>
+<section class="slide level1">
+
+<blockquote>
+<p>[…] we still have to make compromises <em>somewhere</em> […], but we try to bend the curve as far as possible, to reach into areas that were previously thought of as unimaginable.</p>
+<p>– Stjepan Glavina</p>
+</blockquote>
+</section>
+<section class="slide level1">
+
+<blockquote>
+<p>so many awesome engineering projects can be pulled off by just taking a quick glance at where current research is at in a particular field.</p>
+<p>Often, implementations are lagging by several decades.</p>
+<p>– Tyler</p>
+</blockquote>
+</section>
+<section id="making-cool-developments-accessible" class="slide level1">
+<h1>Making cool developments accessible</h1>
+<ol type="1">
+<li class="fragment">Curiosity</li>
+<li class="fragment">“I can do it”</li>
+<li class="fragment">Community and development transparency</li>
+</ol>
 </section>
 <section id="thank-you" class="slide level1">
 <h1>Thank you!</h1>
