@@ -10,6 +10,8 @@ slideNumber: true
 history: true
 navigation: false
 controls: 0
+height: 600
+width: 800
 ---
 # Hi, I'm Pascal Hertleif
 
@@ -39,13 +41,18 @@ First things first.
 
 - - -
 
-*Pascal says:*
-
-> A programming language is only as useful as what people actually use it for.
+> […] getting things right
+>
+> <cite>– Pascal, writing presumptuous talk titles</cite>
 
 ::: notes
 
-This is not a technical talk in these sense that it'll contain code.
+Wow, such a presumptuous title!
+What was I thinking?
+Can I deliver a talk on how to write the _perfect_ program?
+
+Of course not.
+This is not even a technical talk in these sense that it'll contain code!
 I'll talk about a bunch of cool projects,
 but what I want to get at is:
 How can we make more of those?
@@ -95,7 +102,7 @@ and I think it's super good.
 
 > Technology from the past come to save the future from itself
 >
-> – Graydon Hoare, inventor of Rust
+> <cite>– Graydon Hoare, inventor of Rust</cite>
 
 ::: notes
 
@@ -137,8 +144,11 @@ As you can see it's originally from patent laws.
 
 ## We don't need to re-invent everything
 
-We should embrace the ideas that are already out there,
-and apply them in the current context.
+Embrace existing ideas and put them into our current context.
+
+. . .
+
+~~Not invented here~~
 
 ::: notes
 
@@ -176,7 +186,7 @@ What were the original designers not happy with?
 
 - - -
 
-# For example: The borrow checker
+# For example:<br/>The borrow checker
 
 Problem: Write memory-safe high-performance code
 
@@ -203,11 +213,18 @@ High performance, and memory safety.
 
 . . .
 
-[Cyclone] (2002): "safe C", never-NULL pointers, region analysis
+[Cyclone] (2002)
+
+- "safe C"
+- never-NULL pointers
+- region analysis
 
 . . .
 
-[ATS] (2005): ML-inspired language with a built-in theorem prover
+[ATS] (2005)
+
+- ML-inspired language 
+- built-in theorem prover
 
 [Cyclone]: https://en.wikipedia.org/wiki/Cyclone_(programming_language)
 [ATS]: https://en.wikipedia.org/wiki/ATS_(programming_language)
@@ -264,9 +281,9 @@ but let's have a little wider of a look.
 
 ## Prior art
 
-> This work is about a functional language \(Λ_LA\), with a typable sub-set \(Λ^{T}_{LA}\). The types for \(Λ^{T}_{LA}\) are polymorphic formulas of Intuitionistic Light Affine Logic (ILAL in the following.) Polymorphism is a la ML: all the universal quantifications in any formula must occur as top-most operators.
+> This work is about a functional language \(Λ_{LA}\), with a typable sub-set \(Λ^{T}_{LA}\). The types for \(Λ^{T}_{LA}\) are polymorphic formulas of Intuitionistic Light Affine Logic […]
 >
-> – Roversi, Luca. "Light affine logic as a programming language: a first contribution." _International Journal of Foundations of Computer Science_ 11.01 (2000): 113-152.
+> <cite>– Roversi, Luca. "Light affine logic as a programming language: a first contribution." _International Journal of Foundations of Computer Science_ 11.01 (2000): 113-152.</cite>
 
 ::: notes
 
@@ -281,7 +298,7 @@ Similar to ATS and Cyclone this doesn't become recognized by mainstream programm
 
 > […] Rust finally nailed it down in a way that is accessible to everyone.
 >
-> – Stjepan Glavina
+> <cite>– Stjepan Glavina</cite>
 
 ::: notes
 
@@ -306,7 +323,7 @@ Non-lexical lifetimes
 
 . . .
 
-Niko's thoughts on [After NLL](http://smallcultfollowing.com/babysteps/blog/2018/11/01/after-nll-interprocedural-conflicts/)
+Borrow parts of a struct, self-references
 
 ::: notes
 
@@ -320,6 +337,7 @@ Non-lexical lifetimes refined what the scope of an owned resource is.
 
 But this is not the end, either.
 Borrowing/mutating parts of structs can still be made smoother.
+See Niko's thoughts on [After NLL](http://smallcultfollowing.com/babysteps/blog/2018/11/01/after-nll-interprocedural-conflicts/).
 
 :::
 
@@ -357,13 +375,14 @@ cf. [Hacking](https://github.com/rust-lang/regex/blob/master/HACKING.md) doc in 
 ## Adapting to the current context
 
 > - Bringing it all together
-> - Unicode support!
+> - Unicode support
+> - High concurrency
 
 - - -
 
 > I think of Rust as fertile ground for growing cool stuff.
 >
-> – Stjepan Glavina
+> <cite>– Stjepan Glavina</cite>
 
 ::: notes
 
@@ -380,13 +399,13 @@ but Stjepan also wrote the implementation of `[T]::sort()`.
 
 - - -
 
-# Why the current implementation of `sort()` was written
+# Why `sort()` is like it is
 
 > I was reading the previous implementation of `sort`,
 > just out of curiosity,
 > and thought "wait, this could be done better".
 >
-> – Stjepan Glavina
+> <cite>– Stjepan Glavina</cite>
 
 ::: notes
 
@@ -409,7 +428,7 @@ and help people be curious.
 - timsort
 - …
 
-See [Rust PR #38192](https://github.com/rust-lang/rust/pull/38192) for details
+(See [Rust PR #38192](https://github.com/rust-lang/rust/pull/38192) for details)
 
 ::: notes
 
@@ -429,7 +448,7 @@ This was Stjepan's first PR for Rust!
 
 . . .
 
-It took three days to get into `std`!
+It took just three days to get into `std`!
 
 . . .
 
@@ -482,22 +501,81 @@ Stjepan's next project was crossbeam-channels.
 
 ## Other examples
 
-- parking_lot
-- hashbrown
+- [parking_lot](https://github.com/rust-lang/rust/pull/56410)
+- [hashbrown](https://github.com/rust-lang/rust/pull/56241)
+
+::: notes
+
+parking_lot contains user-space synchronization primitives, taken from Webkit
+
+hashbrown is a port of Google's SwissTable, a super fast hash table implementation
+
+they work as drop-in replacements! both have open PRs to be used in `std`
+
+:::
 
 - - -
 
 # Where to find inspiration: Academia
 
+::: notes
+
+How many of you studied something related to computer science?
+
+How many of you liked reading papers? I know it's not easily accessible.
+
+But…
+
+:::
+
 - - -
 
-> so many awesome engineering projects can be pulled off by
+> So many awesome engineering projects can be pulled off by
 > just taking a quick glance at where current research is at in a
 > particular field.
 > 
 > Often, implementations are lagging by several decades.
 > 
-> – Tyler Neely
+> <cite>– Tyler Neely</cite>
+
+::: notes
+
+There is a huge opportunity here,
+and I feel like not enough people know about it!
+
+:::
+
+- - -
+
+## Where to find interesting papers
+
+- [Papers We Love](https://paperswelove.org/) (paperswelove.org)
+- [the morning paper](https://blog.acolyer.org/) (blog.acolyer.org)
+
+::: notes
+
+You can find a lot of research on a huge variety of topics
+for free.
+The problem is most often curating.
+For example, check PapersWeLove.org
+
+:::
+
+- - -
+
+> Most of the things I read have no useful application for me right away.
+> I need to let them simmer for a while.
+>
+> <cite>– Geoffroy Couprie</cite>
+
+::: notes
+
+So can you act like a machine that consumes research papers
+and produce awesome Rust projects?
+Probably not.
+That's not how people or research work.
+
+:::
 
 - - -
 
@@ -506,13 +584,30 @@ Stjepan's next project was crossbeam-channels.
 > Can we reach a little bit farther?
 > Can we bend the curve somewhere?
 >
-> – Stjepan Glavina
+> <cite>– Stjepan Glavina</cite>
+
+::: notes
+
+You can approach this with a certain point of view, though.
+Like: What can we do with this that wasn't possible before?
+
+> […] we still have to make compromises *somewhere* […],
+> but we try to bend the curve as far as possible,
+> to reach into areas that were previously thought of as unimaginable.
+>
+> <cite>– Stjepan Glavina</cite>
+
+:::
 
 - - -
 
-## "Can we bend the curve somewhere?"
+## "bend the curve"
 
 The community is trying to find a way to overcome traditional trade-offs
+
+. . .
+
+incl. putting brand-new research into non-intimidating Rust-flavored packages!
 
 ::: notes
 
@@ -527,21 +622,13 @@ but also:
 
 :::
 
-
-- - -
-
-> […] we still have to make compromises *somewhere* […],
-> but we try to bend the curve as far as possible,
-> to reach into areas that were previously thought of as unimaginable.
->
-> – Stjepan Glavina
-
 - - -
 
 # Another tale: Green threads
 
-> - Rust originally had green threads for async I/O
-> - This wasn't the easy thing to do, pays off in the long run
+> - Rust used green threads for async I/O
+> - They were removed
+> - Not the easy thing to do, but pays off in the long run
 
 ::: notes
 
@@ -563,15 +650,32 @@ based on state machines and generators.
 This wasn't the easy way,
 but it was the one that gives Rust much of the flexibility it has today.
 
+If you want to hear more about that,
+go to Katharina's keynote later today.
+
 :::
 
 - - -
 
-# Making cool developments accessible
+# Do ambitious things!
 
-> 1. Be curious
-> 2. Try to bend the curve
-> 3. Transparent and friendly community
+> 1. Be curious!
+> 2. Try to bend the curve!
+> 3. Become part of the community!
+
+::: notes
+
+Let's recap.
+
+This is the part of the talk where
+I need to put a lot of exclamation marks on the slide.
+
+Rust is in a very good place
+for you to try and do ambitious things.
+We are all trying to figure out how to use Rust.
+There is much to be explored!
+
+:::
 
 - - -
 
@@ -579,7 +683,13 @@ but it was the one that gives Rust much of the flexibility it has today.
 
 > 1. Other ecosystems
 > 2. Academia
-> 3. Completely different fields?
+> 3. Completely different areas?
+
+::: notes
+
+
+
+:::
 
 - - -
 

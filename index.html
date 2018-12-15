@@ -16,6 +16,7 @@
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
       .reveal .slide blockquote {font-style: normal; }
+      .reveal .slide blockquote cite {font-size: 0.8em; font-style: italic; }
   </style>
   <link rel="stylesheet" href="template/css/theme/pascal-light.css" id="theme">
   <!-- Printing and PDF exports -->
@@ -57,12 +58,13 @@
 </section>
 <section class="slide level1">
 
-<p><em>Pascal says:</em></p>
 <blockquote>
-<p>A programming language is only as useful as what people actually use it for.</p>
+<p>[…] getting things right</p>
+<p><cite>– Pascal, writing presumptuous talk titles</cite></p>
 </blockquote>
 <aside class="notes">
-<p>This is not a technical talk in these sense that it’ll contain code. I’ll talk about a bunch of cool projects, but what I want to get at is: How can we make more of those?</p>
+<p>Wow, such a presumptuous title! What was I thinking? Can I deliver a talk on how to write the <em>perfect</em> program?</p>
+<p>Of course not. This is not even a technical talk in these sense that it’ll contain code! I’ll talk about a bunch of cool projects, but what I want to get at is: How can we make more of those?</p>
 <p>Why? We are still trying to figure out how to write great Rust code. There are some big ambitious projects in it that work; but there is no 5 Steps guide to making one of those.</p>
 </aside>
 </section>
@@ -90,7 +92,7 @@
 <h2 id="what-is-rust-2">What is Rust?</h2>
 <blockquote>
 <p>Technology from the past come to save the future from itself</p>
-<p>– Graydon Hoare, inventor of Rust</p>
+<p><cite>– Graydon Hoare, inventor of Rust</cite></p>
 </blockquote>
 <aside class="notes">
 <p>Woah, that’s a completely different spin on it.</p>
@@ -116,10 +118,13 @@
 <section class="slide level1">
 
 <h2 id="we-dont-need-to-re-invent-everything">We don’t need to re-invent everything</h2>
-<p>We should embrace the ideas that are already out there, and apply them in the current context.</p>
+<p>Embrace existing ideas and put them into our current context.</p>
+<div class="fragment">
+<p><del>Not invented here</del></p>
 <aside class="notes">
 <p>Some people I know have this tendency to try to work through problem all on their own. They sit down, think real hard, and come up with a solution. That is a good idea when it comes to very domain-specific problems but more general concepts it really pays off to look at what is already out there.</p>
 </aside>
+</div>
 </section>
 <section class="slide level1">
 
@@ -133,7 +138,7 @@
 </div>
 </section>
 <section id="for-example-the-borrow-checker" class="slide level1">
-<h1>For example: The borrow checker</h1>
+<h1>For example:<br/>The borrow checker</h1>
 <p>Problem: Write memory-safe high-performance code</p>
 <aside class="notes">
 <p>I’ll talk about some projects, as well as some people, and their stories. The first one is about the borrow checker. Or, the Ownership and Borrowing system that is arguably the main features that differentiates Rust from other mainstream languages.</p>
@@ -145,10 +150,19 @@
 
 <h2 id="prior-art-1">Prior art</h2>
 <div class="fragment">
-<p><a href="https://en.wikipedia.org/wiki/Cyclone_(programming_language)">Cyclone</a> (2002): “safe C”, never-NULL pointers, region analysis</p>
+<p><a href="https://en.wikipedia.org/wiki/Cyclone_(programming_language)">Cyclone</a> (2002)</p>
+<ul>
+<li>“safe C”</li>
+<li>never-NULL pointers</li>
+<li>region analysis</li>
+</ul>
 </div>
 <div class="fragment">
-<p><a href="https://en.wikipedia.org/wiki/ATS_(programming_language)">ATS</a> (2005): ML-inspired language with a built-in theorem prover</p>
+<p><a href="https://en.wikipedia.org/wiki/ATS_(programming_language)">ATS</a> (2005)</p>
+<ul>
+<li>ML-inspired language</li>
+<li>built-in theorem prover</li>
+</ul>
 <aside class="notes">
 <p>I specifically said “mainstream languages”: Because there are other languages that tried that before!</p>
 <p>At AT&amp;T Labs, the Cyclone language was developed as a “safe C” dialect. If you look at its features you’ll see a bunch of similarities with Rust:</p>
@@ -187,8 +201,8 @@
 
 <h2 id="prior-art-3">Prior art</h2>
 <blockquote>
-<p>This work is about a functional language <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Λ</mi><mi>L</mi></msub><mi>A</mi></mrow><annotation encoding="application/x-tex">Λ_LA</annotation></semantics></math>, with a typable sub-set <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>Λ</mi><mrow><mi>L</mi><mi>A</mi></mrow><mi>T</mi></msubsup><annotation encoding="application/x-tex">Λ^{T}_{LA}</annotation></semantics></math>. The types for <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>Λ</mi><mrow><mi>L</mi><mi>A</mi></mrow><mi>T</mi></msubsup><annotation encoding="application/x-tex">Λ^{T}_{LA}</annotation></semantics></math> are polymorphic formulas of Intuitionistic Light Affine Logic (ILAL in the following.) Polymorphism is a la ML: all the universal quantifications in any formula must occur as top-most operators.</p>
-<p>– Roversi, Luca. “Light affine logic as a programming language: a first contribution.” <em>International Journal of Foundations of Computer Science</em> 11.01 (2000): 113-152.</p>
+<p>This work is about a functional language <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>Λ</mi><mrow><mi>L</mi><mi>A</mi></mrow></msub><annotation encoding="application/x-tex">Λ_{LA}</annotation></semantics></math>, with a typable sub-set <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>Λ</mi><mrow><mi>L</mi><mi>A</mi></mrow><mi>T</mi></msubsup><annotation encoding="application/x-tex">Λ^{T}_{LA}</annotation></semantics></math>. The types for <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>Λ</mi><mrow><mi>L</mi><mi>A</mi></mrow><mi>T</mi></msubsup><annotation encoding="application/x-tex">Λ^{T}_{LA}</annotation></semantics></math> are polymorphic formulas of Intuitionistic Light Affine Logic […]</p>
+<p><cite>– Roversi, Luca. “Light affine logic as a programming language: a first contribution.” <em>International Journal of Foundations of Computer Science</em> 11.01 (2000): 113-152.</cite></p>
 </blockquote>
 <aside class="notes">
 <p>People tried to define programming languages based on affine logic before. Roversi describes <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi>Λ</mi><mrow><mi>L</mi><mi>A</mi></mrow><mi>T</mi></msubsup><annotation encoding="application/x-tex">Λ^{T}_{LA}</annotation></semantics></math> (“Lambda L.A. T.”) in 2000.</p>
@@ -199,7 +213,7 @@
 
 <blockquote>
 <p>[…] Rust finally nailed it down in a way that is accessible to everyone.</p>
-<p>– Stjepan Glavina</p>
+<p><cite>– Stjepan Glavina</cite></p>
 </blockquote>
 <aside class="notes">
 <p>And this is where Rust made the break-through: It is based on the same, old concept of affine logic, but packages it up in a practical and attractive way.</p>
@@ -214,11 +228,11 @@
 <p>Non-lexical lifetimes</p>
 </div>
 <div class="fragment">
-<p>Niko’s thoughts on <a href="http://smallcultfollowing.com/babysteps/blog/2018/11/01/after-nll-interprocedural-conflicts/">After NLL</a></p>
+<p>Borrow parts of a struct, self-references</p>
 <aside class="notes">
 <p>Just adapting affine logic is not enough, we need to make it actually usable. The first iteration was good, but had known cases it didn’t support.</p>
 <p>This is where new research is being done. Non-lexical lifetimes refined what the scope of an owned resource is.</p>
-<p>But this is not the end, either. Borrowing/mutating parts of structs can still be made smoother.</p>
+<p>But this is not the end, either. Borrowing/mutating parts of structs can still be made smoother. See Niko’s thoughts on <a href="http://smallcultfollowing.com/babysteps/blog/2018/11/01/after-nll-interprocedural-conflicts/">After NLL</a>.</p>
 </aside>
 </div>
 </section>
@@ -251,25 +265,26 @@
 <h2 id="adapting-to-the-current-context-1">Adapting to the current context</h2>
 <ul>
 <li class="fragment">Bringing it all together</li>
-<li class="fragment">Unicode support!</li>
+<li class="fragment">Unicode support</li>
+<li class="fragment">High concurrency</li>
 </ul>
 </section>
 <section class="slide level1">
 
 <blockquote>
 <p>I think of Rust as fertile ground for growing cool stuff.</p>
-<p>– Stjepan Glavina</p>
+<p><cite>– Stjepan Glavina</cite></p>
 </blockquote>
 <aside class="notes">
 <p>So far we’ve seen two big examples of cool Rust projects; which are arguably also the most famous ones.</p>
 <p>But let’s look at another story. I’ve quoted Stjepan Glavia before. You might know him as the author of <code>crossbeam-channel</code> but Stjepan also wrote the implementation of <code>[T]::sort()</code>.</p>
 </aside>
 </section>
-<section id="why-the-current-implementation-of-sort-was-written" class="slide level1">
-<h1>Why the current implementation of <code>sort()</code> was written</h1>
+<section id="why-sort-is-like-it-is" class="slide level1">
+<h1>Why <code>sort()</code> is like it is</h1>
 <blockquote>
 <p>I was reading the previous implementation of <code>sort</code>, just out of curiosity, and thought “wait, this could be done better”.</p>
-<p>– Stjepan Glavina</p>
+<p><cite>– Stjepan Glavina</cite></p>
 </blockquote>
 <aside class="notes">
 <p>The most important part in this quote, for me, is “out of curiosity”. Being curious is an amazing trait! We should embrace it, and help people be curious.</p>
@@ -285,7 +300,7 @@
 <li>timsort</li>
 <li>…</li>
 </ul>
-<p>See <a href="https://github.com/rust-lang/rust/pull/38192">Rust PR #38192</a> for details</p>
+<p>(See <a href="https://github.com/rust-lang/rust/pull/38192">Rust PR #38192</a> for details)</p>
 <aside class="notes">
 <p>Sorting algorithms are one of the introductory topics in computer science. That doesn’t make them boring, though! There a bunch of real-world considerations that are discussed on little in academia, like cache locality.</p>
 </aside>
@@ -295,7 +310,7 @@
 <h2 id="community">Community</h2>
 <p>This was Stjepan’s first PR for Rust!</p>
 <div class="fragment">
-<p>It took three days to get into <code>std</code>!</p>
+<p>It took just three days to get into <code>std</code>!</p>
 </div>
 <div class="fragment">
 <p>He followed this up with a RFC to add <code>sort_unstable</code></p>
@@ -337,32 +352,75 @@
 
 <h2 id="other-examples">Other examples</h2>
 <ul>
-<li>parking_lot</li>
-<li>hashbrown</li>
+<li><a href="https://github.com/rust-lang/rust/pull/56410">parking_lot</a></li>
+<li><a href="https://github.com/rust-lang/rust/pull/56241">hashbrown</a></li>
 </ul>
+<aside class="notes">
+<p>parking_lot contains user-space synchronization primitives, taken from Webkit</p>
+<p>hashbrown is a port of Google’s SwissTable, a super fast hash table implementation</p>
+<p>they work as drop-in replacements! both have open PRs to be used in <code>std</code></p>
+</aside>
 </section>
 <section id="where-to-find-inspiration-academia" class="slide level1">
 <h1>Where to find inspiration: Academia</h1>
+<aside class="notes">
+<p>How many of you studied something related to computer science?</p>
+<p>How many of you liked reading papers? I know it’s not easily accessible.</p>
+<p>But…</p>
+</aside>
 </section>
 <section class="slide level1">
 
 <blockquote>
-<p>so many awesome engineering projects can be pulled off by just taking a quick glance at where current research is at in a particular field.</p>
+<p>So many awesome engineering projects can be pulled off by just taking a quick glance at where current research is at in a particular field.</p>
 <p>Often, implementations are lagging by several decades.</p>
-<p>– Tyler Neely</p>
+<p><cite>– Tyler Neely</cite></p>
 </blockquote>
+<aside class="notes">
+<p>There is a huge opportunity here, and I feel like not enough people know about it!</p>
+</aside>
+</section>
+<section class="slide level1">
+
+<h2 id="where-to-find-interesting-papers">Where to find interesting papers</h2>
+<ul>
+<li><a href="https://paperswelove.org/">Papers We Love</a> (paperswelove.org)</li>
+<li><a href="https://blog.acolyer.org/">the morning paper</a> (blog.acolyer.org)</li>
+</ul>
+<aside class="notes">
+<p>You can find a lot of research on a huge variety of topics for free. The problem is most often curating. For example, check PapersWeLove.org</p>
+</aside>
+</section>
+<section class="slide level1">
+
+<blockquote>
+<p>Most of the things I read have no useful application for me right away. I need to let them simmer for a while.</p>
+<p><cite>– Geoffroy Couprie</cite></p>
+</blockquote>
+<aside class="notes">
+<p>So can you act like a machine that consumes research papers and produce awesome Rust projects? Probably not. That’s not how people or research work.</p>
+</aside>
 </section>
 <section class="slide level1">
 
 <blockquote>
 <p>Whenever something interesting comes out of academia, I try to think: How do we make this more practical? Can we reach a little bit farther? Can we bend the curve somewhere?</p>
-<p>– Stjepan Glavina</p>
+<p><cite>– Stjepan Glavina</cite></p>
 </blockquote>
+<aside class="notes">
+<p>You can approach this with a certain point of view, though. Like: What can we do with this that wasn’t possible before?</p>
+<blockquote>
+<p>[…] we still have to make compromises <em>somewhere</em> […], but we try to bend the curve as far as possible, to reach into areas that were previously thought of as unimaginable.</p>
+<p><cite>– Stjepan Glavina</cite></p>
+</blockquote>
+</aside>
 </section>
 <section class="slide level1">
 
-<h2 id="can-we-bend-the-curve-somewhere">“Can we bend the curve somewhere?”</h2>
+<h2 id="bend-the-curve">“bend the curve”</h2>
 <p>The community is trying to find a way to overcome traditional trade-offs</p>
+<div class="fragment">
+<p>incl. putting brand-new research into non-intimidating Rust-flavored packages!</p>
 <aside class="notes">
 <ul>
 <li>memory safety without garbage collection</li>
@@ -374,19 +432,14 @@
 </blockquote>
 <p>(Stjepan)</p>
 </aside>
-</section>
-<section class="slide level1">
-
-<blockquote>
-<p>[…] we still have to make compromises <em>somewhere</em> […], but we try to bend the curve as far as possible, to reach into areas that were previously thought of as unimaginable.</p>
-<p>– Stjepan Glavina</p>
-</blockquote>
+</div>
 </section>
 <section id="another-tale-green-threads" class="slide level1">
 <h1>Another tale: Green threads</h1>
 <ul>
-<li class="fragment">Rust originally had green threads for async I/O</li>
-<li class="fragment">This wasn’t the easy thing to do, pays off in the long run</li>
+<li class="fragment">Rust used green threads for async I/O</li>
+<li class="fragment">They were removed</li>
+<li class="fragment">Not the easy thing to do, but pays off in the long run</li>
 </ul>
 <aside class="notes">
 <p>To allow nice async I/O, green threads and global event loop are good ideas. There was a lot of prior art on this. So that is what Rust had in 2014.</p>
@@ -394,23 +447,32 @@
 <p>So despite not having an alternative ready, green threads were removed.</p>
 <p>This is why now we’re seeing futures and async/await being implemented in totally different styles, based on state machines and generators.</p>
 <p>This wasn’t the easy way, but it was the one that gives Rust much of the flexibility it has today.</p>
+<p>If you want to hear more about that, go to Katharina’s keynote later today.</p>
 </aside>
 </section>
-<section id="making-cool-developments-accessible" class="slide level1">
-<h1>Making cool developments accessible</h1>
+<section id="do-ambitious-things" class="slide level1">
+<h1>Do ambitious things!</h1>
 <ol type="1">
-<li class="fragment">Be curious</li>
-<li class="fragment">Try to bend the curve</li>
-<li class="fragment">Transparent and friendly community</li>
+<li class="fragment">Be curious!</li>
+<li class="fragment">Try to bend the curve!</li>
+<li class="fragment">Become part of the community!</li>
 </ol>
+<aside class="notes">
+<p>Let’s recap.</p>
+<p>This is the part of the talk where I need to put a lot of exclamation marks on the slide.</p>
+<p>Rust is in a very good place for you to try and do ambitious things. We are all trying to figure out how to use Rust. There is much to be explored!</p>
+</aside>
 </section>
 <section id="where-to-look-for-inspiration" class="slide level1">
 <h1>Where to look for inspiration</h1>
 <ol type="1">
 <li class="fragment">Other ecosystems</li>
 <li class="fragment">Academia</li>
-<li class="fragment">Completely different fields?</li>
+<li class="fragment">Completely different areas?</li>
 </ol>
+<aside class="notes">
+
+</aside>
 </section>
 <section id="thank-you" class="slide level1">
 <h1>Thank you!</h1>
@@ -437,6 +499,11 @@
         slideNumber: true,
         // Push each slide change to the browser history
         history: true,
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 800,
+        height: 600,
 
         // Optional reveal.js plugins
         dependencies: [
