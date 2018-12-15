@@ -104,6 +104,10 @@ and I think it's super good.
 >
 > <cite>– Graydon Hoare, inventor of Rust</cite>
 
+. . .
+
+<img src="images/travolta.gif" alt="confused travolta" style="border: 0; width: 50%; box-shadow: none;" />
+
 ::: notes
 
 Woah, that's a completely different spin on it.
@@ -137,6 +141,23 @@ looking at "prior art".
 
 If you don't know this phrase, here is how Wikipedia defines it.
 As you can see it's originally from patent laws.
+
+:::
+
+- - -
+
+![](images/copy-cup.jpg)
+
+::: notes
+
+Luckily,
+a lot of the concepts we use
+and the software we write
+is open source.
+
+And it turns out that stealing software (or ideas)
+is not really possible,
+since the original doesn't just vanish.
 
 :::
 
@@ -376,15 +397,14 @@ cf. [Hacking](https://github.com/rust-lang/regex/blob/master/HACKING.md) doc in 
 
 > - Bringing it all together
 > - Unicode support
-> - High concurrency
-
-- - -
-
-> I think of Rust as fertile ground for growing cool stuff.
->
-> <cite>– Stjepan Glavina</cite>
+> - Highly concurrent
 
 ::: notes
+
+This is all interesting,
+but why is ripgrep so successful?
+
+(bringing it all together, unicode, concurrency)
 
 So far we've seen two big examples
 of cool Rust projects;
@@ -557,7 +577,25 @@ and I feel like not enough people know about it!
 You can find a lot of research on a huge variety of topics
 for free.
 The problem is most often curating.
-For example, check PapersWeLove.org
+For example, check PapersWeLove.org or "the morning paper" blog.
+
+Reading papers is not easy, though.
+The same Tyler also told me this story of how he is a really slow reader
+and this means that he can't just read a paper on his lunch break
+and get anything usable from it.
+
+I feel the same way,
+and I'd like to share with you some common approaches
+to reading academic works.
+First reading the abstract, i.e., the summary at the beginning of the paper,
+is a good idea.
+I then tend to skip right to the conclusion,
+which often has the same content
+but put into different words and described from a different perspective.
+Just having read that is a great way to judge if this paper is interesting to you.
+After that, you also have a better understanding of the context
+the paper was written in.
+And you might be able to identify the sections that are most interesting to you.
 
 :::
 
@@ -676,6 +714,12 @@ that are marked as 'unstable'
 -- people know/think that we can still do better!
 
 :::
+
+- - -
+
+> I think of Rust as fertile ground for growing cool stuff.
+>
+> <cite>– Stjepan Glavina</cite>
 
 - - -
 
