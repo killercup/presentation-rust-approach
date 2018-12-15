@@ -61,6 +61,10 @@
 <blockquote>
 <p>A programming language is only as useful as what people actually use it for.</p>
 </blockquote>
+<aside class="notes">
+<p>This is not a technical talk in these sense that it’ll contain code. I’ll talk about a bunch of cool projects, but what I want to get at is: How can we make more of those?</p>
+<p>Why? We are still trying to figure out how to write great Rust code. There are some big ambitious projects in it that work; but there is no 5 Steps guide to making one of those.</p>
+</aside>
 </section>
 <section id="what-is-rust" class="slide level1">
 <h1>What is Rust?</h1>
@@ -220,7 +224,7 @@
 </section>
 <section id="another-example-ripgrep" class="slide level1">
 <h1>Another example: ripgrep</h1>
-<p>super fast competitor to <code>grep</code> and <code>ag</code></p>
+<p><a href="https://blog.burntsushi.net/ripgrep/">super fast</a> competitor to <code>grep</code> and <code>ag</code></p>
 <p>uses Rust’s regex crate</p>
 </section>
 <section class="slide level1">
@@ -232,6 +236,15 @@
 <li class="fragment">Lazy DFA</li>
 <li class="fragment">Teddy</li>
 </ul>
+<aside class="notes">
+<ul>
+<li>Pike VM: executes regular expressions using deterministic finite automaton</li>
+<li>Find literal prefixes faster using Aho-Corasick or Boyer-Moore</li>
+<li>lazy: Build DFA as you go, and cache states, inspired by Russ Cox writing on this</li>
+<li>Teddy: Use SIMD instructions for substring matching, from Hyperscan project</li>
+</ul>
+<p>cf. <a href="https://github.com/rust-lang/regex/blob/master/HACKING.md">Hacking</a> doc in regex repo</p>
+</aside>
 </section>
 <section class="slide level1">
 
@@ -241,22 +254,24 @@
 <li class="fragment">Unicode support!</li>
 </ul>
 </section>
-<section id="it-doesnt-have-to-be-big" class="slide level1">
-<h1>It doesn’t have to be big</h1>
+<section class="slide level1">
+
+<blockquote>
+<p>I think of Rust as fertile ground for growing cool stuff.</p>
+<p>– Stjepan Glavina</p>
+</blockquote>
 <aside class="notes">
 <p>So far we’ve seen two big examples of cool Rust projects; which are arguably also the most famous ones.</p>
 <p>But let’s look at another story. I’ve quoted Stjepan Glavia before. You might know him as the author of <code>crossbeam-channel</code> but Stjepan also wrote the implementation of <code>[T]::sort()</code>.</p>
 </aside>
 </section>
-<section class="slide level1">
-
-<h2 id="why-the-current-implementation-of-sort-was-written">Why the current implementation of <code>sort()</code> was written</h2>
+<section id="why-the-current-implementation-of-sort-was-written" class="slide level1">
+<h1>Why the current implementation of <code>sort()</code> was written</h1>
 <blockquote>
-<p>I was reading the previous implementation of sort, just out of curiosity, and thought “wait, this could be done better”.</p>
+<p>I was reading the previous implementation of <code>sort</code>, just out of curiosity, and thought “wait, this could be done better”.</p>
 <p>– Stjepan Glavina</p>
 </blockquote>
 <aside class="notes">
-<p>Sorting algorithms are one of the introductory topics in computer science. That doesn’t make them boring, though!</p>
 <p>The most important part in this quote, for me, is “out of curiosity”. Being curious is an amazing trait! We should embrace it, and help people be curious.</p>
 </aside>
 </section>
@@ -272,7 +287,7 @@
 </ul>
 <p>See <a href="https://github.com/rust-lang/rust/pull/38192">Rust PR #38192</a> for details</p>
 <aside class="notes">
-
+<p>Sorting algorithms are one of the introductory topics in computer science. That doesn’t make them boring, though! There a bunch of real-world considerations that are discussed on little in academia, like cache locality.</p>
 </aside>
 </section>
 <section class="slide level1">
@@ -280,7 +295,7 @@
 <h2 id="community">Community</h2>
 <p>This was Stjepan’s first PR for Rust!</p>
 <div class="fragment">
-<p>It took three days to get into <code>std</code></p>
+<p>It took three days to get into <code>std</code>!</p>
 </div>
 <div class="fragment">
 <p>He followed this up with a RFC to add <code>sort_unstable</code></p>
@@ -289,14 +304,52 @@
 </aside>
 </div>
 </section>
+<section id="where-to-find-inspiration-other-ecosystems" class="slide level1">
+<h1>Where to find inspiration: Other ecosystems</h1>
+</section>
 <section class="slide level1">
 
+<h2 id="crossbeam-channel">crossbeam-channel</h2>
+<p>An improvement for the channels in <code>std</code></p>
+<div class="fragment">
+<p>Take inspiration from Go’s implementation</p>
+</div>
+<div class="fragment">
+<p>bounded/unbounded, MPMC, fancy <code>select!</code> macro</p>
+<aside class="notes">
+<p>Stjepan’s next project was crossbeam-channels.</p>
+<ul>
+<li><code>std::sync::mpsc</code>: single consumer, no stable <code>select!</code>, slow</li>
+<li>idea: bounded and unbounded mpmc channels</li>
+<li><a href="https://stjepang.github.io/2017/08/13/designing-a-channel.html">Designing a channel</a></li>
+<li><a href="https://github.com/crossbeam-rs/crossbeam-channel/issues/39">Lessons to be taken from channels in Go?</a> - <a href="https://docs.google.com/document/d/1yIAYmbvL3JxOKOjuCyon7JhW4cSv1wy5hC0ApeGMV9s/pub">design doc from go</a></li>
+<li><a href="https://github.com/crossbeam-rs/crossbeam-channel/pull/41">crossbeam-channel select macro</a></li>
+<li><a href="https://i.imgur.com/tRI4HMO.png">perf</a> (<a href="https://twitter.com/stjepang/status/1006202765499125760">src</a>)
+<ul>
+<li>avoid lock contention as much as possible - the typical “happy path” is lock-free.</li>
+<li>Plus, there is a lot of small optimizations that add up.</li>
+</ul></li>
+</ul>
+</aside>
+</div>
+</section>
+<section class="slide level1">
+
+<h2 id="other-examples">Other examples</h2>
+<ul>
+<li>parking_lot</li>
+<li>hashbrown</li>
+</ul>
+</section>
+<section id="where-to-find-inspiration-academia" class="slide level1">
+<h1>Where to find inspiration: Academia</h1>
 </section>
 <section class="slide level1">
 
 <blockquote>
-<p>I think of Rust as fertile ground for growing cool stuff.</p>
-<p>– Stjepan Glavina</p>
+<p>so many awesome engineering projects can be pulled off by just taking a quick glance at where current research is at in a particular field.</p>
+<p>Often, implementations are lagging by several decades.</p>
+<p>– Tyler Neely</p>
 </blockquote>
 </section>
 <section class="slide level1">
@@ -310,6 +363,17 @@
 
 <h2 id="can-we-bend-the-curve-somewhere">“Can we bend the curve somewhere?”</h2>
 <p>The community is trying to find a way to overcome traditional trade-offs</p>
+<aside class="notes">
+<ul>
+<li>memory safety without garbage collection</li>
+<li>abstraction without overhead</li>
+</ul>
+<p>but also:</p>
+<blockquote>
+<p>expert-only, researchy concurrency in a non-intimidating Rust-flavored package</p>
+</blockquote>
+<p>(Stjepan)</p>
+</aside>
 </section>
 <section class="slide level1">
 
@@ -318,20 +382,34 @@
 <p>– Stjepan Glavina</p>
 </blockquote>
 </section>
-<section class="slide level1">
-
-<blockquote>
-<p>so many awesome engineering projects can be pulled off by just taking a quick glance at where current research is at in a particular field.</p>
-<p>Often, implementations are lagging by several decades.</p>
-<p>– Tyler</p>
-</blockquote>
+<section id="another-tale-green-threads" class="slide level1">
+<h1>Another tale: Green threads</h1>
+<ul>
+<li class="fragment">Rust originally had green threads for async I/O</li>
+<li class="fragment">This wasn’t the easy thing to do, pays off in the long run</li>
+</ul>
+<aside class="notes">
+<p>To allow nice async I/O, green threads and global event loop are good ideas. There was a lot of prior art on this. So that is what Rust had in 2014.</p>
+<p>But: It didn’t fit well with the direction the language was being developed in.</p>
+<p>So despite not having an alternative ready, green threads were removed.</p>
+<p>This is why now we’re seeing futures and async/await being implemented in totally different styles, based on state machines and generators.</p>
+<p>This wasn’t the easy way, but it was the one that gives Rust much of the flexibility it has today.</p>
+</aside>
 </section>
 <section id="making-cool-developments-accessible" class="slide level1">
 <h1>Making cool developments accessible</h1>
 <ol type="1">
-<li class="fragment">Curiosity</li>
-<li class="fragment">“I can do it”</li>
-<li class="fragment">Community and development transparency</li>
+<li class="fragment">Be curious</li>
+<li class="fragment">Try to bend the curve</li>
+<li class="fragment">Transparent and friendly community</li>
+</ol>
+</section>
+<section id="where-to-look-for-inspiration" class="slide level1">
+<h1>Where to look for inspiration</h1>
+<ol type="1">
+<li class="fragment">Other ecosystems</li>
+<li class="fragment">Academia</li>
+<li class="fragment">Completely different fields?</li>
 </ol>
 </section>
 <section id="thank-you" class="slide level1">

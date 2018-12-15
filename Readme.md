@@ -43,6 +43,20 @@ First things first.
 
 > A programming language is only as useful as what people actually use it for.
 
+::: notes
+
+This is not a technical talk in these sense that it'll contain code.
+I'll talk about a bunch of cool projects,
+but what I want to get at is:
+How can we make more of those?
+
+Why?
+We are still trying to figure out how to write great Rust code.
+There are some big ambitious projects in it that work;
+but there is no 5 Steps guide to making one of those.
+
+:::
+
 - - -
 
 # What is Rust?
@@ -313,7 +327,8 @@ Borrowing/mutating parts of structs can still be made smoother.
 
 # Another example: ripgrep
 
-super fast competitor to `grep` and `ag`
+[super fast](https://blog.burntsushi.net/ripgrep/)
+competitor to `grep` and `ag`
 
 uses Rust's regex crate
 
@@ -326,6 +341,17 @@ uses Rust's regex crate
 > - Lazy DFA
 > - Teddy
 
+::: notes
+
+- Pike VM: executes regular expressions using deterministic finite automaton
+- Find literal prefixes faster using Aho-Corasick or Boyer-Moore
+- lazy: Build DFA as you go, and cache states, inspired by Russ Cox writing on this
+- Teddy: Use SIMD instructions for substring matching, from Hyperscan project
+
+cf. [Hacking](https://github.com/rust-lang/regex/blob/master/HACKING.md) doc in regex repo
+
+:::
+
 - - -
 
 ## Adapting to the current context
@@ -335,7 +361,9 @@ uses Rust's regex crate
 
 - - -
 
-# It doesn't have to be big
+> I think of Rust as fertile ground for growing cool stuff.
+>
+> – Stjepan Glavina
 
 ::: notes
 
@@ -352,18 +380,15 @@ but Stjepan also wrote the implementation of `[T]::sort()`.
 
 - - -
 
-## Why the current implementation of `sort()` was written
+# Why the current implementation of `sort()` was written
 
-> I was reading the previous implementation of sort,
+> I was reading the previous implementation of `sort`,
 > just out of curiosity,
 > and thought "wait, this could be done better".
 >
 > – Stjepan Glavina
 
 ::: notes
-
-Sorting algorithms are one of the introductory topics in computer science.
-That doesn't make them boring, though!
 
 The most important part in this quote,
 for me,
@@ -388,7 +413,11 @@ See [Rust PR #38192](https://github.com/rust-lang/rust/pull/38192) for details
 
 ::: notes
 
-
+Sorting algorithms are one of the introductory topics in computer science.
+That doesn't make them boring, though!
+There a bunch of real-world considerations
+that are discussed on little in academia,
+like cache locality.
 
 :::
 
@@ -400,7 +429,7 @@ This was Stjepan's first PR for Rust!
 
 . . .
 
-It took three days to get into `std`
+It took three days to get into `std`!
 
 . . .
 
@@ -418,13 +447,57 @@ And three days later this is part of the std lib!
 
 - - -
 
-
+# Where to find inspiration: Other ecosystems
 
 - - -
 
-> I think of Rust as fertile ground for growing cool stuff.
->
-> – Stjepan Glavina
+## crossbeam-channel
+
+An improvement for the channels in `std`
+
+. . .
+
+Take inspiration from Go's implementation
+
+. . .
+
+bounded/unbounded, MPMC, fancy `select!` macro
+
+::: notes
+
+Stjepan's next project was crossbeam-channels.
+
+- `std::sync::mpsc`: single consumer, no stable `select!`, slow
+- idea: bounded and unbounded mpmc channels
+- [Designing a channel](https://stjepang.github.io/2017/08/13/designing-a-channel.html)
+- [Lessons to be taken from channels in Go?](https://github.com/crossbeam-rs/crossbeam-channel/issues/39) - [design doc from go](https://docs.google.com/document/d/1yIAYmbvL3JxOKOjuCyon7JhW4cSv1wy5hC0ApeGMV9s/pub)
+- [crossbeam-channel select macro](https://github.com/crossbeam-rs/crossbeam-channel/pull/41)
+- [perf](https://i.imgur.com/tRI4HMO.png) ([src](https://twitter.com/stjepang/status/1006202765499125760))
+    - avoid lock contention as much as possible - the typical "happy path" is lock-free.
+    - Plus, there is a lot of small optimizations that add up.
+
+:::
+
+- - -
+
+## Other examples
+
+- parking_lot
+- hashbrown
+
+- - -
+
+# Where to find inspiration: Academia
+
+- - -
+
+> so many awesome engineering projects can be pulled off by
+> just taking a quick glance at where current research is at in a
+> particular field.
+> 
+> Often, implementations are lagging by several decades.
+> 
+> – Tyler Neely
 
 - - -
 
@@ -441,6 +514,20 @@ And three days later this is part of the std lib!
 
 The community is trying to find a way to overcome traditional trade-offs
 
+::: notes
+
+- memory safety without garbage collection
+- abstraction without overhead
+
+but also:
+
+> expert-only, researchy concurrency in a non-intimidating Rust-flavored package
+
+(Stjepan)
+
+:::
+
+
 - - -
 
 > […] we still have to make compromises *somewhere* […],
@@ -451,21 +538,48 @@ The community is trying to find a way to overcome traditional trade-offs
 
 - - -
 
-> so many awesome engineering projects can be pulled off by
-> just taking a quick glance at where current research is at in a
-> particular field.
-> 
-> Often, implementations are lagging by several decades.
-> 
-> – Tyler
+# Another tale: Green threads
+
+> - Rust originally had green threads for async I/O
+> - This wasn't the easy thing to do, pays off in the long run
+
+::: notes
+
+To allow nice async I/O,
+green threads and global event loop are good ideas.
+There was a lot of prior art on this.
+So that is what Rust had in 2014.
+
+But:
+It didn't fit well with the direction the language was being developed in.
+
+So despite not having an alternative ready,
+green threads were removed.
+
+This is why now we're seeing futures and async/await being implemented
+in totally different styles,
+based on state machines and generators.
+
+This wasn't the easy way,
+but it was the one that gives Rust much of the flexibility it has today.
+
+:::
 
 - - -
 
 # Making cool developments accessible
 
-> 1. Curiosity
-> 2. "I can do it"
-> 3. Community and development transparency
+> 1. Be curious
+> 2. Try to bend the curve
+> 3. Transparent and friendly community
+
+- - -
+
+# Where to look for inspiration
+
+> 1. Other ecosystems
+> 2. Academia
+> 3. Completely different fields?
 
 - - -
 
