@@ -282,6 +282,146 @@ is probably why we are here, at a Rust conference.
 
 - - -
 
+## Adapting to the current context
+
+Original `borrowck` doesn't understand all valid programs
+
+. . .
+
+Non-lexical lifetimes
+
+. . .
+
+Niko's thoughts on [After NLL](http://smallcultfollowing.com/babysteps/blog/2018/11/01/after-nll-interprocedural-conflicts/)
+
+::: notes
+
+Just adapting affine logic is not enough,
+we need to make it actually usable.
+The first iteration was good,
+but had known cases it didn't support.
+
+This is where new research is being done.
+Non-lexical lifetimes refined what the scope of an owned resource is.
+
+But this is not the end, either.
+Borrowing/mutating parts of structs can still be made smoother.
+
+:::
+
+- - -
+
+# Another example: ripgrep
+
+super fast competitor to `grep` and `ag`
+
+uses Rust's regex crate
+
+- - -
+
+## Prior art (regex)
+
+> - Pike VM
+> - Boyer-Moore & Aho-Corasick
+> - Lazy DFA
+> - Teddy
+
+- - -
+
+## Adapting to the current context
+
+> - Bringing it all together
+> - Unicode support!
+
+- - -
+
+# It doesn't have to be big
+
+::: notes
+
+So far we've seen two big examples
+of cool Rust projects;
+which are arguably also the most famous ones.
+
+But let's look at another story.
+I've quoted Stjepan Glavia before.
+You might know him as the author of `crossbeam-channel`
+but Stjepan also wrote the implementation of `[T]::sort()`.
+
+:::
+
+- - -
+
+## Why the current implementation of `sort()` was written
+
+> I was reading the previous implementation of sort,
+> just out of curiosity,
+> and thought "wait, this could be done better".
+>
+> – Stjepan Glavina
+
+::: notes
+
+Sorting algorithms are one of the introductory topics in computer science.
+That doesn't make them boring, though!
+
+The most important part in this quote,
+for me,
+is "out of curiosity".
+Being curious is an amazing trait!
+We should embrace it,
+and help people be curious.
+
+:::
+
+- - -
+
+## Prior art
+
+- current impl
+- regular merge sort
+- blocksort
+- timsort
+- …
+
+See [Rust PR #38192](https://github.com/rust-lang/rust/pull/38192) for details
+
+::: notes
+
+
+
+:::
+
+- - -
+
+## Community
+
+This was Stjepan's first PR for Rust!
+
+. . .
+
+It took three days to get into `std`
+
+. . .
+
+He followed this up with a RFC to add `sort_unstable`
+
+::: notes
+
+Imagine this:
+You check the implementation of a standard library function for fun.
+(Who doesn't click on "src" in the docs for fun?)
+You write a 200 line PR (plus comments and benchmarks).
+And three days later this is part of the std lib!
+
+:::
+
+- - -
+
+
+
+- - -
+
 > I think of Rust as fertile ground for growing cool stuff.
 >
 > – Stjepan Glavina

@@ -204,6 +204,96 @@
 </section>
 <section class="slide level1">
 
+<h2 id="adapting-to-the-current-context">Adapting to the current context</h2>
+<p>Original <code>borrowck</code> doesn’t understand all valid programs</p>
+<div class="fragment">
+<p>Non-lexical lifetimes</p>
+</div>
+<div class="fragment">
+<p>Niko’s thoughts on <a href="http://smallcultfollowing.com/babysteps/blog/2018/11/01/after-nll-interprocedural-conflicts/">After NLL</a></p>
+<aside class="notes">
+<p>Just adapting affine logic is not enough, we need to make it actually usable. The first iteration was good, but had known cases it didn’t support.</p>
+<p>This is where new research is being done. Non-lexical lifetimes refined what the scope of an owned resource is.</p>
+<p>But this is not the end, either. Borrowing/mutating parts of structs can still be made smoother.</p>
+</aside>
+</div>
+</section>
+<section id="another-example-ripgrep" class="slide level1">
+<h1>Another example: ripgrep</h1>
+<p>super fast competitor to <code>grep</code> and <code>ag</code></p>
+<p>uses Rust’s regex crate</p>
+</section>
+<section class="slide level1">
+
+<h2 id="prior-art-regex">Prior art (regex)</h2>
+<ul>
+<li class="fragment">Pike VM</li>
+<li class="fragment">Boyer-Moore &amp; Aho-Corasick</li>
+<li class="fragment">Lazy DFA</li>
+<li class="fragment">Teddy</li>
+</ul>
+</section>
+<section class="slide level1">
+
+<h2 id="adapting-to-the-current-context-1">Adapting to the current context</h2>
+<ul>
+<li class="fragment">Bringing it all together</li>
+<li class="fragment">Unicode support!</li>
+</ul>
+</section>
+<section id="it-doesnt-have-to-be-big" class="slide level1">
+<h1>It doesn’t have to be big</h1>
+<aside class="notes">
+<p>So far we’ve seen two big examples of cool Rust projects; which are arguably also the most famous ones.</p>
+<p>But let’s look at another story. I’ve quoted Stjepan Glavia before. You might know him as the author of <code>crossbeam-channel</code> but Stjepan also wrote the implementation of <code>[T]::sort()</code>.</p>
+</aside>
+</section>
+<section class="slide level1">
+
+<h2 id="why-the-current-implementation-of-sort-was-written">Why the current implementation of <code>sort()</code> was written</h2>
+<blockquote>
+<p>I was reading the previous implementation of sort, just out of curiosity, and thought “wait, this could be done better”.</p>
+<p>– Stjepan Glavina</p>
+</blockquote>
+<aside class="notes">
+<p>Sorting algorithms are one of the introductory topics in computer science. That doesn’t make them boring, though!</p>
+<p>The most important part in this quote, for me, is “out of curiosity”. Being curious is an amazing trait! We should embrace it, and help people be curious.</p>
+</aside>
+</section>
+<section class="slide level1">
+
+<h2 id="prior-art-4">Prior art</h2>
+<ul>
+<li>current impl</li>
+<li>regular merge sort</li>
+<li>blocksort</li>
+<li>timsort</li>
+<li>…</li>
+</ul>
+<p>See <a href="https://github.com/rust-lang/rust/pull/38192">Rust PR #38192</a> for details</p>
+<aside class="notes">
+
+</aside>
+</section>
+<section class="slide level1">
+
+<h2 id="community">Community</h2>
+<p>This was Stjepan’s first PR for Rust!</p>
+<div class="fragment">
+<p>It took three days to get into <code>std</code></p>
+</div>
+<div class="fragment">
+<p>He followed this up with a RFC to add <code>sort_unstable</code></p>
+<aside class="notes">
+<p>Imagine this: You check the implementation of a standard library function for fun. (Who doesn’t click on “src” in the docs for fun?) You write a 200 line PR (plus comments and benchmarks). And three days later this is part of the std lib!</p>
+</aside>
+</div>
+</section>
+<section class="slide level1">
+
+</section>
+<section class="slide level1">
+
 <blockquote>
 <p>I think of Rust as fertile ground for growing cool stuff.</p>
 <p>– Stjepan Glavina</p>
