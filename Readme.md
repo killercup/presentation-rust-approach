@@ -657,11 +657,33 @@ go to Katharina's keynote later today.
 
 - - -
 
+## It's okay to iterate on ideas
+
+The first version might not be perfect
+
+. . .
+
+and that's totally okay
+
+::: notes
+
+- too complicated
+- too weird/not a good fit
+- not powerful enough
+
+This is one of the reasons why there are so many features in Rust
+that are marked as 'unstable'
+-- people know/think that we can still do better!
+
+:::
+
+- - -
+
 # Do ambitious things!
 
 > 1. Be curious!
 > 2. Try to bend the curve!
-> 3. Become part of the community!
+> 3. Help people discover awesome things!
 
 ::: notes
 
